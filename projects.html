@@ -1,0 +1,115 @@
+<!doctype html>
+<html>
+<head>
+  <title >Projects</title>
+  <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel = "stylesheet" type = "text/css" href = "reset.css" />
+  <link rel = "stylesheet" type = "text/css" href = "style.css" />
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+  <style type="text/css">
+    div.info{
+      font-size: 30px;
+      color: #000000;
+      white-space: pre-line;
+    }
+    img.m{
+      border: 3px solid #000000;
+      position: relative;
+      height: 400;
+      width: 435;
+      box-sizing: border-box;
+    }
+    img.thumb{
+      height: 100px;
+      width: 100px;
+      border: 3px solid #000000;
+      box-sizing: border-box;
+    }
+    body,html{
+        padding: 0;
+        margin: 0;
+        margin-top: 0;
+    }
+    img.a{
+      position: absolute;
+      right: 10%;
+      width: 30%;
+      height: auto;
+    }
+    div.a{
+      margin-right : 10%;
+      margin-left: 10%;
+      font-size: 30px;
+      color: #000000;
+      white-space: pre-line;
+    }
+  </style>
+</head>  
+<body>
+  <!-- Navigation Bar-->
+  <ul>
+    <li><a href="index.html">Home</a></li>
+    <li><a href="#">Projects</a></li>
+    <li><a href="contacts.html">Contact Me</a></li>
+  </ul>
+
+  <!-- Header-->
+  <h1> <strong> Projects</strong></h1>
+  <hr class="a">
+  <br />
+
+  <div class="a">Here are a few fun projects that I have worked on</div>
+  <br />
+
+  <div class="info" id="info">Click on the Project to Learn More</div>
+  <img id="mainI" height="450" width="486" class="m" src="Fridge.png" />
+  <br />
+  <div id="divCont" name="divCont"></div>
+
+  <script language="javascript">
+    function obj(name, description, imgsmall){
+      this.name = name;
+      this.descript = description;
+      this.imgS = imgsmall;
+    }
+      var arr = [];
+
+      //populate obj parameters
+      arr.push(new obj("The Fridge", "Hi!", "Fridge.png"));
+      arr.push(new obj("Jump to Stump", "A 3-D Co-op fighting game made in Unity. Credit to Ryan Dreher and Favour Okerembe-Mba for working with me on this project.", "jump.png"))
+      arr.push(new obj("SublimeCraft", "A Game created in Unity with a group of 4 that simulates a workplace (I do not take credit for the art)", 
+      "Subl.png"));
+      arr.push(new obj("3-D Modelled Car", "Electric Racing Team car 3D printed with PLA", "car.png"));
+      arr.push(new obj("3-D Printed Bulbasaur", "    Two Bulbasaurs 3D printed and painted", "b.png"));
+
+      for (var i = 0; i < arr.length; i++) {
+        document.getElementById("divCont").innerHTML += "<img id='" + i + "' src='"+ arr[i].imgS + "' class='thumb'>";
+      }
+
+    $(document).ready(function(){
+      $('#divCont img').on({
+        mouseover : function() {
+          $(this).css({
+            'cursor': 'pointer',
+          });
+          var imageUrl = $(this).attr('src');
+          $('#mainI').fadeOut(300, function(){
+            $(this).attr('src', imageUrl);
+          }).fadeIn(300);
+        },
+        mouseout : function(){
+          $(this).css({
+            'cursor' : 'default',
+          });
+        },
+        click : function(){
+          var index = $("#divCont img").index(this);
+              $("#info").html("Title: " + arr[index].name + "<br />" + arr[index].descript)
+                      .show()
+        },
+      });
+    });
+  </script>
+</body>
+</html>
